@@ -291,26 +291,41 @@
 
     /* 375px Mobile - Optimized Stack */
     @media (max-width: 480px) {
+      body {
+        overflow-x: hidden;
+      }
+
       .container {
-        padding: 16px;
+        width: calc(100% - 24px);
+        margin: 12px auto;
+        padding: 20px 16px;
         border-radius: 12px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      .header-row {
+        align-items: center;
+        gap: 8px;
       }
 
       .header-content h2,
       .header-content p {
-        font-size: 19px;
+        font-size: 18px;
       }
 
       .carousel-view {
-        height: 240px;
+        height: 220px;
+        gap: 8px;
+        width: 100%;
       }
 
+      /* Percentages reduced to prevent horizontal scroll (considering 8px gap) */
       .item-active {
-        width: 85%;
+        width: calc(82% - 8px);
       }
 
       .item-queued-1 {
-        width: 15%;
+        width: 18%;
       }
 
       .item-queued-2,
@@ -320,12 +335,18 @@
       }
 
       .footer-copy {
-        font-size: 15px;
+        font-size: 14px;
       }
 
       .btn-numbers {
         width: 100%;
         text-align: center;
+        padding: 12px;
+      }
+
+      .nav-controls {
+        transform: scale(0.9);
+        margin-right: -4px;
       }
     }
   </style>
