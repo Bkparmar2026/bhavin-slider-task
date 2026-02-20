@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What's happening - Stripe Section</title>
+  <link rel="stylesheet" href="bhavin-slider-assets/mkt-ssr-statics/assets/_next/static/css/28196e9d8feb3651.css">
+  <style>
+    :root {
+      --stripe-blue: #635bff;
+      --stripe-text: #424770;
+      --stripe-heading: #1a1f36;
+      --bg-light: #ffffff;
+    }
+
+    body {
+      background: #f6f9fc;
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Ubuntu, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 60px auto;
+      padding: 40px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 50px 100px -20px rgba(50, 50, 93, 0.12), 0 30px 60px -30px rgba(0, 0, 0, 0.15);
+    }
+
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 40px;
+    }
+
+    .header-content h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--stripe-heading);
+      margin: 0 0 4px 0;
+    }
+
+    .header-content p {
+      font-size: 28px;
+      font-weight: 600;
+      color: #a3acb9;
+      margin: 0;
+    }
+
+    .nav-controls {
+      display: flex;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .nav-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      border: none;
+      background: #f0f4f8;
+      color: #727f96;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn:hover {
+      background: #e2e8f0;
+      color: var(--stripe-blue);
+    }
+
+    /* Squeezy Carousel Implementation */
+    .carousel-view {
+      display: flex;
+      gap: 16px;
+      height: 440px;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .carousel-item {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      flex-shrink: 0;
+      transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+      cursor: pointer;
+      will-change: width, transform, opacity;
+      /* Improves smoothness and prevents blur during animation */
+      backface-visibility: hidden;
+    }
+
+    .carousel-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      /* HD Quality Improvements */
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      transform: translateZ(0);
+      filter: contrast(1.02) saturate(1.05);
+      /* Makes colors pop and edges feel sharper */
+    }
+
+    /* Rules for squeezy positions */
+    .item-active {
+      width: 65%;
+      opacity: 1;
+    }
+
+    .item-queued-1 {
+      width: 15%;
+      opacity: 1;
+    }
+
+    .item-queued-2 {
+      width: 10%;
+      opacity: 1;
+    }
+
+    .item-queued-3 {
+      width: 5%;
+      opacity: 1;
+    }
+
+    .item-hidden {
+      width: 0;
+      opacity: 0;
+      margin: 0;
+      pointer-events: none;
+    }
+
+    /* Info text and button */
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-top: 40px;
+      gap: 32px;
+    }
+
+    .footer-copy {
+      flex: 1;
+      font-size: 18px;
+      line-height: 1.5;
+      color: var(--stripe-text);
+    }
+
+    .footer-copy b {
+      color: var(--stripe-heading);
+      font-weight: 700;
+    }
+
+    .footer-copy span {
+      color: #727f96;
+    }
+
+    .btn-numbers {
+      display: inline-block;
+      padding: 10px 18px;
+      background: #fff;
+      color: var(--stripe-blue);
+      border: 1px solid #e3e8ee;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 6px rgba(50, 50, 93, 0.04);
+    }
+
+    .btn-numbers:hover {
+      box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 800px) {
+      .carousel-view {
+        height: 300px;
+      }
+
+      .footer-row {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header-row">
+      <div class="header-content">
+        <h2>What's happening</h2>
+        <p>See the latest from Stripe.</p>
+      </div>
+      <div class="nav-controls">
+        <button class="nav-btn" id="prevBtn" aria-label="Previous">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <button class="nav-btn" id="nextBtn" aria-label="Next">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="carousel-view" id="carouselView">
+      <!-- Items will be injected and classes managed by JS -->
+    </div>
+
+    <div class="footer-row">
+      <div class="footer-copy">
+        <b id="footerTitle">150K+ users have their best day ever on Stripe.</b>
+        <span id="footerDesc">From Black Friday through Cyber Monday 2025, Stripe processed more than US$40bn for
+          businesses while maintaining a 99.9999% uptime.</span>
+      </div>
+      <a href="#" class="btn-numbers">See the numbers &rsaquo;</a>
+    </div>
+  </div>
+
+  <script>
+    const slidesData = [
+      {
+        img: 'bhavin-slider-task/fzn2n1nzq965/6yE6G454SGCJnJgEYsS2MB/70b405a1dce904bc0c6f2698223fb966/the-happenings-bfcm-mobile8750.png',
+        title: '150K+ users have their best day ever on Stripe.',
+        desc: 'From Black Friday through Cyber Monday 2025, Stripe processed more than US$40bn for businesses while maintaining a 99.9999% uptime.'
+      },
+      {
+        img: 'bhavin-slider-task/fzn2n1nzq965/7EVLwfXmG3pl1vhBssMrFB/b6d8612b1f567922c1355d864c279678/the-happenings-payment-retailers-mobile8750.png',
+        title: 'Stripe Climate: Now supporting 10 new projects.',
+        desc: 'Help scale frontier carbon removal technologies by contributing a fraction of your revenue with Stripe Climate.'
+      },
+      {
+        img: 'bhavin-slider-task/fzn2n1nzq965/33xcv8eCmXzMzWXicVQ4cF/83d91fa419ff8d1b9466739b4ecdcb1d/the-happenings-tidemark-mobile8750.png',
+        title: "Tidemark's vertical and SMB SaaS benchmark report.",
+        desc: "Learn what's driving growth in vertical SaaS in 2025 – going multiproduct, embedding fintech and integrating AI."
+      },
+      {
+        img: 'bhavin-slider-task/fzn2n1nzq965/t03tXrgvnHUPGwxYUgSxN/bd8da003434c9e9fb72c719b9edb429b/the-happenings-cheeky-pint-mobile8750.png',
+        title: 'Shopify\'s Tobi Lütke sits down with John Collison.',
+        desc: 'Hear them discuss the choices that shaped Shopify and Stripe, the future of commerce, and their advice for founders.'
+      },
+      {
+        img: 'bhavin-slider-task/fzn2n1nzq965/Pd2JQ7FZ1pYMIMGDwvMdV/13e7e021ca23d042da8ac07be829f7ef/the-happenings-payment-processing-mobile8750.png',
+        title: 'New tools to process payments outside app stores.',
+        desc: 'Read how Stripe can help you process payments outside of the iOS and Android app stores, giving you more control.'
+      },
+      {
+        img: 'bhavin-slider-task/fzn2n1nzq965/4LaZVLqDqGf9091wqUAmFp/fbe9fc307e1336b69bcd9be4ec5c4752/the-happenings-crypto-mobile8750.png',
+        title: 'Crypto.com partners with Stripe.',
+        desc: 'Learn how the partnership can help you tap into a new global customer base by letting customers pay with crypto.'
+      }
+    ];
+
+
+
+    let currentIndex = 0;
+    const carouselView = document.getElementById('carouselView');
+    const footerTitle = document.getElementById('footerTitle');
+    const footerDesc = document.getElementById('footerDesc');
+
+    // Create item nodes
+    slidesData.forEach((data, i) => {
+      const div = document.createElement('div');
+      div.className = 'carousel-item';
+      div.innerHTML = `<img src="${data.img}" alt="Slide ${i}">`;
+      div.onclick = () => updateCarousel(i);
+      carouselView.appendChild(div);
+    });
+
+    const itemNodes = document.querySelectorAll('.carousel-item');
+
+    function updateCarousel(newIndex) {
+      if (newIndex < 0) newIndex = slidesData.length - 1;
+      if (newIndex >= slidesData.length) newIndex = 0;
+
+      currentIndex = newIndex;
+
+      // Update footer
+      footerTitle.innerText = slidesData[currentIndex].title + " ";
+      footerDesc.innerText = slidesData[currentIndex].desc;
+
+      // Update classes for each node
+      itemNodes.forEach((node, i) => {
+        node.className = 'carousel-item';
+
+        if (i === currentIndex) {
+          node.classList.add('item-active');
+        } else if (i === (currentIndex + 1) % slidesData.length) {
+          node.classList.add('item-queued-1');
+        } else if (i === (currentIndex + 2) % slidesData.length) {
+          node.classList.add('item-queued-2');
+        } else if (i === (currentIndex + 3) % slidesData.length) {
+          node.classList.add('item-queued-3');
+        } else {
+          node.classList.add('item-hidden');
+        }
+      });
+    }
+
+    document.getElementById('prevBtn').onclick = () => updateCarousel(currentIndex - 1);
+    document.getElementById('nextBtn').onclick = () => updateCarousel(currentIndex + 1);
+
+    // Initial load
+    updateCarousel(0);
+  </script>
+</body>
+
+</html>
