@@ -185,13 +185,147 @@
       transform: translateY(-1px);
     }
 
-    @media (max-width: 800px) {
+    /* Responsive Breakpoints & Pixel-Perfect Adjustments */
+
+    /* 1440px Desktop - Large */
+    @media (min-width: 1440px) {
+      .container {
+        max-width: 1200px;
+        padding: 60px;
+      }
+
+      .header-content h2,
+      .header-content p {
+        font-size: 32px;
+      }
+
       .carousel-view {
-        height: 300px;
+        height: 500px;
+      }
+    }
+
+    /* 1024px Desktop/Tablet Landscape */
+    @media (max-width: 1024px) {
+      .container {
+        max-width: 900px;
+        padding: 40px;
+        margin: 40px auto;
+      }
+
+      .header-content h2,
+      .header-content p {
+        font-size: 26px;
+      }
+
+      .carousel-view {
+        height: 400px;
+      }
+
+      .item-active {
+        width: 60%;
+      }
+
+      .item-queued-1 {
+        width: 20%;
+      }
+
+      .item-queued-2 {
+        width: 10%;
+      }
+
+      .item-queued-3 {
+        width: 5%;
+      }
+    }
+
+    /* 768px Tablet Portrait - Transition to Stack/Condensed */
+    @media (max-width: 768px) {
+      .container {
+        max-width: 95%;
+        padding: 24px;
+        margin: 20px auto;
+      }
+
+      .header-row {
+        margin-bottom: 24px;
+      }
+
+      .header-content h2,
+      .header-content p {
+        font-size: 22px;
+      }
+
+      .carousel-view {
+        height: 320px;
+        gap: 12px;
       }
 
       .footer-row {
         flex-direction: column;
+        gap: 20px;
+        margin-top: 24px;
+      }
+
+      .footer-copy {
+        font-size: 16px;
+      }
+
+      /* Adjust squeezy for smaller screen to maintain visibility */
+      .item-active {
+        width: 75%;
+      }
+
+      .item-queued-1 {
+        width: 15%;
+      }
+
+      .item-queued-2 {
+        width: 10%;
+      }
+
+      .item-queued-3 {
+        width: 0;
+        opacity: 0;
+      }
+    }
+
+    /* 375px Mobile - Optimized Stack */
+    @media (max-width: 480px) {
+      .container {
+        padding: 16px;
+        border-radius: 12px;
+      }
+
+      .header-content h2,
+      .header-content p {
+        font-size: 19px;
+      }
+
+      .carousel-view {
+        height: 240px;
+      }
+
+      .item-active {
+        width: 85%;
+      }
+
+      .item-queued-1 {
+        width: 15%;
+      }
+
+      .item-queued-2,
+      .item-queued-3 {
+        width: 0;
+        opacity: 0;
+      }
+
+      .footer-copy {
+        font-size: 15px;
+      }
+
+      .btn-numbers {
+        width: 100%;
+        text-align: center;
       }
     }
   </style>
