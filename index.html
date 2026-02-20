@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>What's happening - Stripe Section</title>
   <link rel="stylesheet" href="bhavin-slider-assets/mkt-ssr-statics/assets/_next/static/css/28196e9d8feb3651.css">
   <style>
@@ -14,20 +14,31 @@
       --bg-light: #ffffff;
     }
 
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html,
     body {
-      background: #f6f9fc;
+      width: 100%;
       margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      background: #f6f9fc;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Ubuntu, sans-serif;
       -webkit-font-smoothing: antialiased;
     }
 
     .container {
       max-width: 1080px;
+      width: 100%;
       margin: 60px auto;
       padding: 40px;
       background: #fff;
       border-radius: 16px;
       box-shadow: 0 50px 100px -20px rgba(50, 50, 93, 0.12), 0 30px 60px -30px rgba(0, 0, 0, 0.15);
+      position: relative;
     }
 
     .header-row {
@@ -35,6 +46,12 @@
       justify-content: space-between;
       align-items: flex-start;
       margin-bottom: 40px;
+      width: 100%;
+    }
+
+    .header-content {
+      flex: 1;
+      min-width: 0;
     }
 
     .header-content h2 {
@@ -55,6 +72,7 @@
       display: flex;
       gap: 12px;
       margin-top: 10px;
+      flex-shrink: 0;
     }
 
     .nav-btn {
@@ -83,6 +101,7 @@
       height: 440px;
       width: 100%;
       overflow: hidden;
+      position: relative;
     }
 
     .carousel-item {
@@ -93,7 +112,6 @@
       transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
       cursor: pointer;
       will-change: width, transform, opacity;
-      /* Improves smoothness and prevents blur during animation */
       backface-visibility: hidden;
     }
 
@@ -102,14 +120,11 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      /* HD Quality Improvements */
       image-rendering: -webkit-optimize-contrast;
       image-rendering: crisp-edges;
-      -webkit-backface-visibility: hidden;
       backface-visibility: hidden;
       transform: translateZ(0);
-      filter: contrast(1.02) saturate(1.05);
-      /* Makes colors pop and edges feel sharper */
+      filter: contrast(1.01) saturate(1.02);
     }
 
     /* Rules for squeezy positions */
@@ -138,6 +153,7 @@
       opacity: 0;
       margin: 0;
       pointer-events: none;
+      visibility: hidden;
     }
 
     /* Info text and button */
@@ -147,6 +163,7 @@
       align-items: flex-start;
       margin-top: 40px;
       gap: 32px;
+      width: 100%;
     }
 
     .footer-copy {
@@ -154,6 +171,7 @@
       font-size: 18px;
       line-height: 1.5;
       color: var(--stripe-text);
+      min-width: 0;
     }
 
     .footer-copy b {
@@ -178,6 +196,7 @@
       white-space: nowrap;
       transition: all 0.2s ease;
       box-shadow: 0 4px 6px rgba(50, 50, 93, 0.04);
+      flex-shrink: 0;
     }
 
     .btn-numbers:hover {
@@ -185,9 +204,9 @@
       transform: translateY(-1px);
     }
 
-    /* Responsive Breakpoints & Pixel-Perfect Adjustments */
+    /* Responsive Breakpoints */
 
-    /* 1440px Desktop - Large */
+    /* 1440px Desktop */
     @media (min-width: 1440px) {
       .container {
         max-width: 1200px;
@@ -204,12 +223,11 @@
       }
     }
 
-    /* 1024px Desktop/Tablet Landscape */
+    /* 1024px Desktop */
     @media (max-width: 1024px) {
       .container {
         max-width: 900px;
         padding: 40px;
-        margin: 40px auto;
       }
 
       .header-content h2,
@@ -220,34 +238,14 @@
       .carousel-view {
         height: 400px;
       }
-
-      .item-active {
-        width: 60%;
-      }
-
-      .item-queued-1 {
-        width: 20%;
-      }
-
-      .item-queued-2 {
-        width: 10%;
-      }
-
-      .item-queued-3 {
-        width: 5%;
-      }
     }
 
-    /* 768px Tablet Portrait - Transition to Stack/Condensed */
+    /* 768px Tablet */
     @media (max-width: 768px) {
       .container {
         max-width: 95%;
         padding: 24px;
         margin: 20px auto;
-      }
-
-      .header-row {
-        margin-bottom: 24px;
       }
 
       .header-content h2,
@@ -263,14 +261,8 @@
       .footer-row {
         flex-direction: column;
         gap: 20px;
-        margin-top: 24px;
       }
 
-      .footer-copy {
-        font-size: 16px;
-      }
-
-      /* Adjust squeezy for smaller screen to maintain visibility */
       .item-active {
         width: 75%;
       }
@@ -286,52 +278,58 @@
       .item-queued-3 {
         width: 0;
         opacity: 0;
+        visibility: hidden;
       }
     }
 
-    /* 375px Mobile - Optimized Stack */
+    /* 375px Mobile - STRICTOR FIX */
     @media (max-width: 480px) {
-      body {
-        overflow-x: hidden;
-      }
-
       .container {
-        width: calc(100% - 24px);
-        margin: 12px auto;
-        padding: 20px 16px;
-        border-radius: 12px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        margin: 0;
+        padding: 20px 12px;
+        border-radius: 0;
+        box-shadow: none;
       }
 
       .header-row {
         align-items: center;
+        margin-bottom: 24px;
         gap: 8px;
       }
 
       .header-content h2,
       .header-content p {
-        font-size: 18px;
+        font-size: 16px;
+        line-height: 1.2;
+      }
+
+      .nav-controls {
+        transform: scale(0.8);
+        margin-right: -5px;
       }
 
       .carousel-view {
-        height: 220px;
+        height: 200px;
         gap: 8px;
         width: 100%;
       }
 
-      /* Percentages reduced to prevent horizontal scroll (considering 8px gap) */
+      /* Ensure total width with gap stays under 100% */
       .item-active {
-        width: calc(82% - 8px);
+        width: 80%;
       }
 
       .item-queued-1 {
-        width: 18%;
+        width: calc(20% - 8px);
       }
 
       .item-queued-2,
       .item-queued-3 {
         width: 0;
         opacity: 0;
+        visibility: hidden;
+        position: absolute;
       }
 
       .footer-copy {
@@ -341,12 +339,8 @@
       .btn-numbers {
         width: 100%;
         text-align: center;
-        padding: 12px;
-      }
-
-      .nav-controls {
-        transform: scale(0.9);
-        margin-right: -4px;
+        padding: 14px;
+        margin-top: 10px;
       }
     }
   </style>
@@ -373,9 +367,7 @@
       </div>
     </div>
 
-    <div class="carousel-view" id="carouselView">
-      <!-- Items will be injected and classes managed by JS -->
-    </div>
+    <div class="carousel-view" id="carouselView"></div>
 
     <div class="footer-row">
       <div class="footer-copy">
@@ -421,14 +413,11 @@
       }
     ];
 
-
-
     let currentIndex = 0;
     const carouselView = document.getElementById('carouselView');
     const footerTitle = document.getElementById('footerTitle');
     const footerDesc = document.getElementById('footerDesc');
 
-    // Create item nodes
     slidesData.forEach((data, i) => {
       const div = document.createElement('div');
       div.className = 'carousel-item';
@@ -442,17 +431,13 @@
     function updateCarousel(newIndex) {
       if (newIndex < 0) newIndex = slidesData.length - 1;
       if (newIndex >= slidesData.length) newIndex = 0;
-
       currentIndex = newIndex;
 
-      // Update footer
       footerTitle.innerText = slidesData[currentIndex].title + " ";
       footerDesc.innerText = slidesData[currentIndex].desc;
 
-      // Update classes for each node
       itemNodes.forEach((node, i) => {
         node.className = 'carousel-item';
-
         if (i === currentIndex) {
           node.classList.add('item-active');
         } else if (i === (currentIndex + 1) % slidesData.length) {
@@ -469,8 +454,6 @@
 
     document.getElementById('prevBtn').onclick = () => updateCarousel(currentIndex - 1);
     document.getElementById('nextBtn').onclick = () => updateCarousel(currentIndex + 1);
-
-    // Initial load
     updateCarousel(0);
   </script>
 </body>
